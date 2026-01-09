@@ -22,21 +22,21 @@ def run_comparison():
 
     print("\n=== Accuracy ===")
     print("Human Accuracy:",
-          accuracy_score(df["true_label"], df["human_label"]))
+          accuracy_score(df["spam_label"], df["human_label"]))
     print("Model Accuracy:",
-          accuracy_score(df["true_label"], df["model_label"]))
+          accuracy_score(df["spam_label"], df["model_label"]))
 
     print("\n=== ROC-AUC ===")
     print("Human ROC-AUC:",
-          roc_auc_score(df["true_label"], df["human_mean_prob"]))
+          roc_auc_score(df["spam_label"], df["human_mean_prob"]))
     print("Model ROC-AUC:",
-          roc_auc_score(df["true_label"], df["model_prob"]))
+          roc_auc_score(df["spam_label"], df["model_prob"]))
 
     # Error analysis
-    df["human_fp"] = (df["human_label"] == 1) & (df["true_label"] == 0)
-    df["human_fn"] = (df["human_label"] == 0) & (df["true_label"] == 1)
-    df["model_fp"] = (df["model_label"] == 1) & (df["true_label"] == 0)
-    df["model_fn"] = (df["model_label"] == 0) & (df["true_label"] == 1)
+    df["human_fp"] = (df["human_label"] == 1) & (df["spam_label"] == 0)
+    df["human_fn"] = (df["human_label"] == 0) & (df["spam_label"] == 1)
+    df["model_fp"] = (df["model_label"] == 1) & (df["spam_label"] == 0)
+    df["model_fn"] = (df["model_label"] == 0) & (df["spam_label"] == 1)
 
     print("\n=== Error Counts ===")
     print("Human False Positives:", df["human_fp"].sum())

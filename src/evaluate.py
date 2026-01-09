@@ -13,7 +13,7 @@ def save_predictions():
 
     # Save to CSV
     df_eval = pd.DataFrame({
-        'true_label': y_test,
+        'spam_label': y_test,
         'nb_prob': y_prob_nb,
         'lr_prob': y_prob_lr
     })
