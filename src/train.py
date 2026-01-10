@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, roc_auc_score
+from pathlib import Path
 import joblib
 
 def train_models(test_size=0.2, random_state=42):
@@ -30,6 +31,8 @@ def train_models(test_size=0.2, random_state=42):
     print("Naive Bayes ROC-AUC:", roc_auc_score(y_test, y_prob_nb))
     print("Logistic Regression Accuracy:", accuracy_score(y_test, y_pred_lr))
     print("Logistic Regression ROC-AUC:", roc_auc_score(y_test, y_prob_lr))
+
+    Path("results/").mkdir(exist_ok=True)
 
     # Save models and vectorizer for evaluation
     joblib.dump(nb, 'results/nb_model.pkl')

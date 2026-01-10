@@ -37,13 +37,12 @@ pip install -r requirements.txt
 
 ## Usage
 ```bash
-python src/features.py
 python src/train.py
 python src/evaluate.py
 python src/cross_validate.py
 
 # Compare model to human judgements
-python src/human_eval/compare_human_model.py
+python -m src.human_eval.compare.py
 ```
 
 ## Features
@@ -62,18 +61,29 @@ python src/human_eval/compare_human_model.py
 
 ## Results
 Cross-validation metrics:
-
-| Model               | Accuracy       | ROC-AUC       |
-|--------------------|----------------|---------------|
+| Model | Accuracy | ROC-AUC |
+| ---- | --------- | ------- |
 | Naive Bayes         | $0.971 \pm 0.008$ | $0.948 \pm 0.018$ |
 | Logistic Regression | $0.978 \pm 0.006$ | $0.994 \pm 0.003$ |
 
 ## Human vs Model Experiment
 In addition to automated evaluation, this project includes a human experiment designed to compare human intuition against machine predictions on a random set of spam and ham messages.
 
-Participants rated messages on a 0–10 confidence scale, where higher values indicate greater confidence that a message is spam. Human scores are normalized to probabilities and directly compared against model outputs using accuracy, ROC-AUC, and error analysis.
+Participants rated messages on a 0–10 confidence scale, where higher values indicate greater confidence that a message is spam. Human scores are normalized to probabilities and directly compared against model outputs.
 
 See `human_experiment.md` for full methodology, dataset construction, and experimental details.
+
+When comparing model predictions (converted to 0-10 scale) against human judgment from 20 participants:
+| Model	| Correlation | Mean Absolute Error |
+| ----- | ----------- | ------------------- |
+| Naive Bayes | 0.471 |	4.45 (out of 10) |
+| Logistic Regression | 0.487 | 4.37 (out of 10) |
+
+The models accurately learned the training data labels (evidenced by >97% accuracy and stable cross-validation), but show only moderate correlation (~0.47-0.49) with human spam perception. The biggest disagreements occur on messages humans rate 7-9/10 as spam but are labeled as "ham" in the SMS Spam Collection dataset. Humans were more likely to misclassify messages as "spam" in the following contexts:
+- Fortune-telling/horoscope services
+- Chain messages ("send this to all your friends")
+- Informal opt-in promotional content
+- Casual messages with action requests
 
 ## Disclaimer
 
