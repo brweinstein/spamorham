@@ -61,11 +61,4 @@ The top 5 disagreements between models and humans reveal systematic differences:
 
 3. **Model confidence and human hesitation**:  In disagreement cases, models are highly confident (scores near 0), suggesting these patterns are consistently labeled as "ham" in the training set, not edge cases. In contrast, humans were less likely to answer on the extremes.
 
-### Implications
-
-This experiment reveals that binary spam classification accuracy doesn't fully capture alignment with human judgment. The ~50% correlation suggests that subjective spam perception differs significantly from the SMS Spam Collection dataset labels, particularly for: 
-- Social chain messages
-- Opt-in promotional content
-- Informal service offerings
-
 The detailed comparison data is available in `results/human_model_comparison.csv` for further analysis.
